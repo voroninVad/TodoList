@@ -23,8 +23,8 @@ const Todo = () => {
         dispatch(filterTodo(filt))
     }
     return ( 
-       <div className="">
-         <div className="todo">
+       <div className="todo__items">
+         <div className="todo__form">
             <input 
                 type="text"
                 value={inputValue}
@@ -32,16 +32,20 @@ const Todo = () => {
                 placeholder="Введите задачу"
             />
                 <button onClick={handleAddTodo}>Добавить</button>
-        </div>
+        </div>        
+        <div className="filter_btn">
+                <button onClick={()=>handleFilterTodo('all')}>все</button>
+                <button onClick={()=>handleFilterTodo('completed')}>выполненые</button>
+                <button onClick={()=>handleFilterTodo('not completed')} >не выполненые</button>
+            </div>
         <ul>
-            <button onClick={()=>handleFilterTodo('all')}>все</button>
-            <button onClick={()=>handleFilterTodo('completed')}>выполненые</button>
-            <button onClick={()=>handleFilterTodo('not completed')} >не выполненые</button>
             {todos.map((todo) => ( 
-                <li key={todo.id} className={todo.status ? 'done' : 'no-done'}>
-                    {todo.text}
-                    {todo.status ? <span>&#x2713;</span> :<button onClick={() => handleToggleTodo(todo.id)}>Выполнить</button>}
-                    <button onClick={() => handleRemoveTodo(todo.id)}>&#x2715;</button>
+                <li key={todo.id}>
+                    {todo.status ? <span className='done'>выполнено</span> : <span className='no-done'>не выполнено</span>}
+                    <h4>{todo.text}</h4>
+                    {todo.status == false && <button onClick={() => handleToggleTodo(todo.id)}>Выполнить</button>}
+                    <button className='removeBtn' onClick={() => handleRemoveTodo(todo.id)}>&#x2715;</button>
+                    
                 </li>
             ))}
         </ul>
