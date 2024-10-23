@@ -8,6 +8,7 @@
 main{
   font-family: "Open Sans", sans-serif;
   width: 100%;
+  min-height: 100vh;
   background-color: #dfebeb;
   padding-top: 50px;
 }
